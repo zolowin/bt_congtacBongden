@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <img src="pic_bulboff.gif" id="buld1" style="width : 70px"> &emsp;&emsp;&emsp;
+    <img src="pic_bulboff.gif" id="buld2" style="width:70px"><br>
+    <button id="lamp1" onclick="turn1()">Lamp 1</button>
+    <button id="switch" onclick="switchPower()">Switch</button>
+    <button id='lamp2' onclick="turn2()">Lamp 2</button>
+    <script>
+        class ElectricLamp {
+            constructor(name) {
+                this.name = name;
+                this.status = false;
+            }
+
+            turnOff() {
+                return this.status = false;
+            }
+            turnOn() {
+                return this.status = true;
+            }
+        }
+
+        class SwitchButton {
+            constructor(status) {
+                this.status = status;
+               
+            }
+
+            connectToLamp(ElectricLamp) {
+                if (ElectricLamp.status == true) {
+                    alert(`${ElectricLamp.name} On`)
+                } else {
+                    alert(`${ElectricLamp.name} Off`)
+                }
+            }
+            switchOff() {
+                return this.status = false;
+            }
+            switchOn() {
+                return this.status = true;
+            }
+        }
+
+        let powerBtn = new SwitchButton(false);
+        let Lamp1 = new ElectricLamp('Lamp 1');
+        let Lamp2 = new ElectricLamp('Lamp 2');
+
+        function switchPower() {
+            if (powerBtn.status == false) {
+                powerBtn.switchOn();
+                powerBtn.connectToLamp(Lamp1);
+                powerBtn.connectToLamp(Lamp2);
+            } else {
+                powerBtn.switchOff();
+                document.getElementById('buld1').src = "pic_bulboff.gif";
+                document.getElementById('buld2').src = "pic_bulboff.gif";
+            }
+
+            if (powerBtn.status == true) {
+                if (Lamp1.status == true) {
+                    document.getElementById('buld1').src = "pic_bulbon.gif";
+                }
+                if (Lamp2.status == true) {
+                    document.getElementById('buld2').src = "pic_bulbon.gif";
+                }
+            }
+        }
+
+        function turn1() {
+            if (powerBtn.status == true) {
+                if (Lamp1.status == false){
+                    Lamp1.turnOn();
+                    document.getElementById('buld1').src = "pic_bulbon.gif";
+                } else{
+                    Lamp1.turnOff();
+                    document.getElementById('buld1').src = "pic_bulboff.gif";
+                }
+            }
+        }
+
+        function turn2() {
+            if (powerBtn.status == true) {
+                if (Lamp2.status == false){
+                    Lamp2.turnOn();
+                    document.getElementById('buld2').src = "pic_bulbon.gif";
+                } else{
+                    Lamp2.turnOff();
+                    document.getElementById('buld2').src = "pic_bulboff.gif";
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
